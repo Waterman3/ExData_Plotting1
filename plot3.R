@@ -1,9 +1,9 @@
-plot2<-
-function() {
-  ## plot2.R - R script to household electricity consumption
-  ## on 1/2/2007 and 2/2/2007 at 1 minute intervals.
+plot3<-function() {
+  ## plot_oildollar1.R - R script to plot electricity 
+  ## consumption of various parts of the household from
+  ## 1/2/2007 to 2/2/2007 inclusive.
   
-  if(!exists("electric_analysis"))
+  if(!exists("electro_analysis"))
   {
     download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",
                   destfile="electric.zip")
@@ -32,10 +32,14 @@ function() {
   datetime<-strptime(paste(electric_analysis$Date,electric_analysis$Time),
                      format="%d/%m/%Y %H:%M:%S")
   electro_analysis<-cbind(electric_analysis,datetime)
-  with(electro_analysis,plot(Global_active_power ~ datetime,
-                             col="green",type="l",
-                             xlab=" ",
-                             ylab="Global Active Power (kilowatts)"))  
-  dev.copy(png,file="plot2.png")
+  with(electro_analysis,plot(Sub_metering_1 ~ datetime
+                             ,type="l", 
+                        xlab=" ", 
+                        ylab="Energy sub metering"))
+  with(electro_analysis,lines(Sub_metering_2 ~ datetime, col="red"))                  
+  with(electro_analysis,lines(Sub_metering_3 ~ datetime,col="blue"))
+  legend("topright",legend=c("Sub_metering_1", "Sub_metering_2","Sub_metering_3"),
+         fill=c("black","red","blue"),cex=0.5)
+  dev.copy(png,"plot3.png")
   dev.off()
 }
