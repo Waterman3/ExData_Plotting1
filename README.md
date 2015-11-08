@@ -1,4 +1,16 @@
+## Instructions
+
+Read below for background on the plots.
+
+plot1.png is a picture of Plot1 and was created using code from plot1.R.
+plot2.png is a picture of Plot2 and was created using code from plot2.R.
+plot3.png is a picture of Plot3 and was created using code from plot3.R.
+plot4.png is a picture of Plot4 and was created using code from plot4.R.
+
+
 ## Introduction
+
+
 
 This assignment uses data from
 the <a href="http://archive.ics.uci.edu/ml/">UC Irvine Machine
