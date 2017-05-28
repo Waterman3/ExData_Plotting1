@@ -1,4 +1,4 @@
-function() {
+plot4<-function() {
   ## plot4.R - R script to plot for a 
   ##household from 1/2/2007 to 2/2/2007:
   ##1. Global active power consumption;
@@ -6,12 +6,29 @@ function() {
   ##3. Elecricity consumption at various parts of the
   ##   household; and
   ##4. Global reactive power.
+  ## The household is one whose electricity consumption
+  ## data over a period of four years is stored in the University of California Irvine Machine 
+  ## Learning Repository.
+  
+  ## Author: Warwick Taylor
+  ## Date 9 November 2015
+  ## Updated 28 May 2015 (Warwick) - altered comments and added library(data.table).
+  
+  library(data.table)
+  
+  ## Set up plot of 2 rows by 2 columns of graphs.
   
   par(mfrow=c(2,2))
+  
+  ## Download file.
+  
   if(!exists("electric_analysis"))
   {
     download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",
                   destfile="electric.zip")
+    
+    ## Unzip file and read data into a data table.
+    
     unzip("electric.zip")
     electric_analysis<-fread("household_power_consumption.txt",
                              colClasses=c("character",
@@ -40,13 +57,13 @@ function() {
  ## Plot Global active power
  
   with(electro_analysis,plot(Global_active_power ~ datetime,
-                             ,type="l",
+                             type="l",
                              xlab=" ",
                              ylab="Global Active Power"))
   ## Plot Voltage.
   
  with(electro_analysis,plot(Voltage ~ datetime,
-                            ,type="l",
+                            type="l",
                             xlab=" ",
                             ylab="Voltage"))
   # Now plot electricity consumption in various parts

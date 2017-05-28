@@ -1,13 +1,26 @@
 plot3<-function() {
-  ## plot_oildollar1.R - R script to plot electricity 
+  ## plot3.R - R script to plot electricity 
   ## consumption of various parts of the household from
-  ## 1/2/2007 to 2/2/2007 inclusive.
+  ## 1/2/2007 to 2/2/2007 inclusive for a household whose electricity consumption
+  ## data over a period of four years is stored in the University of California Irvine Machine 
+  ## Learning Repository.
+  
+  ## Author: Warwick Taylor
+  ## Date 9 November 2015
+  ## Updated 28 May 2015 (Warwick) - altered comments and added library(data.table).
+   
+  library(data.table)
+  
+  # Download data.
   
   if(!exists("electro_analysis"))
   {
     download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",
                   destfile="electric.zip")
-    unzip("electric.zip")
+  
+    # Unzip file and read into a data table.
+    
+      unzip("electric.zip")
     electric_analysis<-fread("household_power_consumption.txt",
                              colClasses=c("character",
                                           "character",
@@ -32,6 +45,9 @@ plot3<-function() {
   datetime<-strptime(paste(electric_analysis$Date,electric_analysis$Time),
                      format="%d/%m/%Y %H:%M:%S")
   electro_analysis<-cbind(electric_analysis,datetime)
+  
+  # Make plots for various areas of the house.
+  
   with(electro_analysis,plot(Sub_metering_1 ~ datetime
                              ,type="l", 
                         xlab=" ", 
